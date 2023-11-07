@@ -9,3 +9,9 @@ export async function GET() {
   const res = await pool.query("SELECT * FROM tasks ORDER BY id DESC");
   return NextResponse.json(res.rows);
 }
+
+export async function POST(req: NextRequest) {
+  const { projectId, title } = await req.json();
+  if (!title || !projectId) {
+    return NextResponse.json({ error: "need projectId and title" }, { status: 400 });
+  }

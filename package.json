@@ -6,3 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
+  },
+  "dependencies": {
+    "next": "13.4.12",
+    "pg": "^8.11.1",
+    "react": "18.2.0",
