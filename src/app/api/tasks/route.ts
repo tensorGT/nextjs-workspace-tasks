@@ -15,3 +15,9 @@ export async function POST(req: NextRequest) {
   if (!title || !projectId) {
     return NextResponse.json({ error: "need projectId and title" }, { status: 400 });
   }
+  const res = await pool.query(
+    "INSERT INTO tasks (project_id, title) VALUES ($1, $2) RETURNING *",
+    [Number(projectId), String(title)]
+  );
+  return NextResponse.json(res.rows[0], { status: 201 });
+}

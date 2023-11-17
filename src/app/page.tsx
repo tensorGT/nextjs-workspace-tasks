@@ -38,3 +38,17 @@ export default function WorkspaceBoardPage() {
       const saved: Task = await res.json();
       setTasks((prev) => prev.map((t) => (t.id === tempId ? saved : t)));
     }
+  }
+
+  async function toggle(task: Task) {
+    setTasks((prev) => prev.map((t) => (t.id === task.id ? { ...t, done: !t.done } : t)));
+    await fetch("/api/tasks", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: task.id, done: !task.done }),
+    });
+  }
+
+  return (
+    <main style={{ maxWidth: 700, margin: "32px auto", fontFamily: "sans-serif", padding: "0 16px" }}>
+      <h1>Team Workspace Board</h1>
