@@ -4,3 +4,5 @@ playing with workspaces -> projects -> tasks tables in postgres (`ON DELETE CASC
 
 ```bash
 npm install
+npm run dev
+```

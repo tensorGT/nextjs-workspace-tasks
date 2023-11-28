@@ -52,3 +52,17 @@ export default function WorkspaceBoardPage() {
   return (
     <main style={{ maxWidth: 700, margin: "32px auto", fontFamily: "sans-serif", padding: "0 16px" }}>
       <h1>Team Workspace Board</h1>
+      <form onSubmit={addTask} style={{ display: "flex", gap: 8, margin: "14px 0" }}>
+        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="new task..." required />
+        <button type="submit">Add</button>
+      </form>
+      <ul>
+        {tasks.map((t) => (
+          <li key={t.id} onClick={() => toggle(t)} style={{ cursor: "pointer", marginBottom: 6 }}>
+            {t.done ? "[x]" : "[ ]"} {t.title}
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
+}

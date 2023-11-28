@@ -21,3 +21,9 @@ export async function POST(req: NextRequest) {
   );
   return NextResponse.json(res.rows[0], { status: 201 });
 }
+
+export async function PATCH(req: NextRequest) {
+  const { id, done } = await req.json();
+  const res = await pool.query("UPDATE tasks SET done = $1 WHERE id = $2 RETURNING *", [Boolean(done), Number(id)]);
+  return NextResponse.json(res.rows[0]);
+}
